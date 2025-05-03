@@ -1,0 +1,49 @@
+{
+  "listen":
+  [
+    {
+      "number": 1,
+      "host": "127.0.0.1",
+      "port": 8080,
+      "ssl": "false"
+    },
+    {
+      "number": 2,
+      "host": "0.0.0.0",
+      "port": 8443,
+      "ssl": true,
+      "ssl_cert": "certs/server.crt",
+      "ssl_key": "certs/server.key"
+    }
+  ],
+  "routes":
+  [
+    {
+      "number": 1,
+      "path_prefix": "/pub/one",
+      "change_path": "/api",
+      "backends":
+      [
+        {
+          "url": "http://127.0.0.1",
+          "max_client": 100
+        },
+        {
+          "url": "http://172.12.0.2",
+          "max_client": 50
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "path_prefix": "/pub/second",
+      "change_path": "/api",
+      "backends":
+      [
+        {
+          "url": "http://192.168.0.3"
+        }
+      ]
+    }
+  ]
+}

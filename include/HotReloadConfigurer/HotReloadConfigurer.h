@@ -5,13 +5,45 @@
 #ifndef HOTRELOADCONFIGURER_H
 #define HOTRELOADCONFIGURER_H
 
+#include <map>
+#include <thread>
+#include <memory>
+#include <filesystem>
+#include <functional>
+
+
+#include <openssl/sha.h>
+#include <openssl/evp.h>
+
+
+
+namespace fs = std::filesystem;
+
 namespace ht {
     class HotReloadConfigurer {
     public:
 
+
+
     private:
 
+        // sender to the inside service
+        std::map<int, std::string> m_services;
+
+        fs::path m_pathConfigFile;
+
+        std::unique_ptr<std::thread> m_reloadConfigurationThread;
+
+        std::unique_ptr<EVP_MD_CTX, decltype(&EVP_MD_CTX_free)> m_mdCTX;
+
+        const EVP_MD *m_digest = nullptr;
+
+        std::string m_hashStr;
+
+        // listener from outsides
+        std::map<int, std::string> m_listeningStreams;
     };
 };
+
 
 #endif //HOTRELOADCONFIGURER_H

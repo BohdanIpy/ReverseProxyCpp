@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.29)
 project(ReverseProxy)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(ReverseProxy src/main.cpp
         src/HotReloadConfigurer/HotReloadConfigurer.cpp)
