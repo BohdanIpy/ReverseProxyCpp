@@ -15,17 +15,31 @@
 #include <openssl/sha.h>
 #include <openssl/evp.h>
 
-
-
 namespace fs = std::filesystem;
 
 namespace ht {
     class HotReloadConfigurer {
+        class ConfigurerBuilder {
+            fs::path m_path;
+        public:
+            ConfigurerBuilder() = default;
+
+            bool setPath(const fs::path& path);
+
+            std::unique_ptr<HotReloadConfigurer> build();
+        };
+
     public:
 
-
+        ConfigurerBuilder builder();
 
     private:
+
+        friend class ConfigurerBuilder;
+
+        explicit HotReloadConfigurer(const fs::path& pathToConfig);
+
+        void loadConfiguration();
 
         // sender to the inside service
         std::map<int, std::string> m_services;
@@ -44,6 +58,5 @@ namespace ht {
         std::map<int, std::string> m_listeningStreams;
     };
 };
-
 
 #endif //HOTRELOADCONFIGURER_H
