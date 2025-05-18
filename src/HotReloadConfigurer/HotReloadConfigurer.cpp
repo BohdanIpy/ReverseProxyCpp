@@ -2,8 +2,10 @@
 // Created by geth on 5/3/25.
 //
 
-#include "HotReloadConfigurer.h"
 #include <openssl/sha.h>
+
+#include "HotReloadConfigurer.h"
+#include "JsonParser.h"
 
 using namespace ht;
 
@@ -48,5 +50,19 @@ void HotReloadConfigurer::loadConfiguration() {
     //    - Or else parse the json, and compare and modify the listeners and streams
     //    - Update the hash( actualization)
 
+    std::string newHash = to_hex(hash_document_by_path(this->m_pathConfigFile));
+    if(this->m_hashStr.size() == 0) {
+        // First init
+        this->m_hashStr = newHash;
+    }
+    else {
+        if(newHash == this->m_hashStr) {
+            // we do nothing
+        }
+        else {
+            // we reload the data
+
+        }
+    }
 
 }

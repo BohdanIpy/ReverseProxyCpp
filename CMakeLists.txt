@@ -19,7 +19,8 @@ add_executable(ReverseProxy src/main.cpp
         src/HotReloadConfigurer/HotReloadConfigurer.cpp
         src/Models/NetworkService.cpp
         src/Models/ListeningStream.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/JsonParser/JsonParser.hpp
+        include/JsonParser/JsonParser.h
+        src/Models/HttpSession.cpp
 )
 
 find_package(Boost REQUIRED COMPONENTS system)

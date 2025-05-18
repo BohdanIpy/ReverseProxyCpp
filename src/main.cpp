@@ -3,11 +3,10 @@
 #include <filesystem>
 #include <fstream>
 
-#include "JsonParser.hpp"
+#include "JsonParser.h"
 
 using Json = nlohmann::json;
 namespace fs = std::filesystem;
-
 
 int main()
 {
@@ -32,7 +31,6 @@ int main()
         return -1;
     }
 
-    //auto res = json.get<std::pair<std::vector<models::ListeningStream>, std::vector<models::NetworkService>>>();
-
+    auto res = json.get<Config>();
     return 0;
 }

@@ -13,18 +13,8 @@
 namespace fs = std::filesystem;
 
 namespace models {
-    struct backend {
-        std::string url;
-        int port;
-        int max_client;
-    };
-
     class NetworkService {
     public:
-        int number;
-        std::string path_prefix;
-        std::string change_path;
-        std::vector<backend> backends;
 
     private:
 
